@@ -23,5 +23,4 @@ export function workouts(state = [], action) {
         default:
             return state;
     }
-    console.log(state)
 }

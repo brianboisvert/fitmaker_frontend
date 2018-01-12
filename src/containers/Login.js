@@ -1,11 +1,13 @@
 import React from 'react';
-// import api from '../services/api';
+import { connect} from 'react-redux'
+import {loginUser} from '../actions/workouts'
+
 
 class Login extends React.Component {
   constructor() {
     super();
     this.state = {
-      error: false,
+      // error: false,
       fields: {
         username: '',
         password: ''
@@ -21,22 +23,8 @@ class Login extends React.Component {
   handleSubmit = e => {
     e.preventDefault()
     console.log(this.state.fields)
-    // api.auth.login(this.state.fields)
+    this.props.loginUser(this.state.fields.username, this.state.fields.password)
   }
-
-  // handleSubmit = e => {
-  //   e.preventDefault();
-  //   api.auth
-  //     .login(this.state.fields.username, this.state.fields.password)
-  //     .then(res => {
-  //       if (res.error) {
-  //         this.setState({ error: true });
-  //       } else {
-  //         this.props.handleLogin(res);
-  //         this.props.history.push('/');
-  //       }
-  //     });
-  // };
 
   render() {
     const { fields } = this.state;
@@ -74,4 +62,5 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+
+export default connect(null, {loginUser: loginUser})(Login)
