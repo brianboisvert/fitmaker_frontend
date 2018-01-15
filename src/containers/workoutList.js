@@ -10,20 +10,22 @@ class WorkoutList extends React.Component {
   }
 
   render() {
-    // console.log(this.props.workouts)
-    if (this.props.hasErrored) {
-      return <p>Sorry! There was an error loading the workout</p>;
-    }
+    // if (this.props.hasErrored) {
+    //   return <p>Sorry! There was an error loading the workout</p>;
+    // }
+    //
+    // if (this.props.isLoading) {
+    //   return <p>Loading...</p>;
+    // }
 
-    if (this.props.isLoading) {
-      return <p>Loading...</p>;
-    }
+    // const workouts = this.props.workouts.map( (workout, i) => {
+    //   return (
+    //     <Workout workout={workout} key={i} />
+    //   )
+    // })
 
-    const workouts = this.props.workouts.map( (workout, i) => {
-      return (
-        <Workout workout={workout} key={i} />
-      )
-    })
+    const workouts = this.props.workouts ? this.props.workouts.map((el, i)=><Workout title={el.title} key={i}/>) : null
+
     return (
       <ul>
         {workouts}
@@ -33,9 +35,8 @@ class WorkoutList extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state)
   return {
-    workouts: state.workouts,
+    workouts: state.auth.currentUser.workouts,
     hasErrored: state.workoutsHasErrored,
     isLoading: state.workoutsIsLoading
   };

@@ -11,6 +11,7 @@
     "react-scripts": "1.0.17",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
+    "semantic-ui": "^2.2.13",
     "whatwg-fetch": "^2.0.3"
   },
   "scripts": {

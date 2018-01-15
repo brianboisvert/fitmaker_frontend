@@ -5,6 +5,11 @@ import Login from './containers/Login';
 // import { router, route } from 'react-router';
 import {connect} from 'react-redux'
 import {fetchUser} from './actions/workouts'
+import NavBar from './containers/NavBar'
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import LandingPage from './components/LandingPage'
+import SignUp from './containers/SignUp'
+
 
 class App extends React.Component {
 
@@ -14,13 +19,18 @@ class App extends React.Component {
     }
   }
   render() {
-    console.log(this.props)
+    // console.log(this.props)
     return (
-      <div>
-        <Login />
-        <WorkoutForm />
-        <WorkoutList />
-      </div>
+      <Router>
+        <div>
+          <NavBar />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/create_workout" component={WorkoutForm} />
+          <Route exact path="/home" component={WorkoutList} />
+          <Route exact path="/" component={LandingPage} />
+          <Route exact path="/register" component={SignUp} />
+        </div>
+      </Router>
     );
   }
 }

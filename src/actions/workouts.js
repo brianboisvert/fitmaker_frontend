@@ -10,8 +10,8 @@ export function workoutsIsLoading(bool) {
         isLoading: bool
     };
 }
+
 export function workoutsFetchDataSuccess(workouts) {
-  console.log("fetch hit")
     return {
         type: 'WORKOUTS_FETCH_DATA_SUCCESS',
         workouts
@@ -37,9 +37,9 @@ export function workoutsFetchData(url) {
 }
 
 export function postWorkout (newWorkout){
+  console.log(newWorkout.user_id)
     return (dispatch) =>
     {
-      console.log("action hit", newWorkout)
       fetch('http://localhost:3000/workouts', {
         method: 'POST',
         headers: {
@@ -51,7 +51,8 @@ export function postWorkout (newWorkout){
           intensity: newWorkout.intensity,
           category: newWorkout.category,
           duration: newWorkout.duration,
-          description: newWorkout.description
+          description: newWorkout.description,
+          user_id: newWorkout.user_id
         })
       }).then(res => res.json())
       .then(workout => dispatch({type: "ADD_WORKOUT", payload: workout}))
@@ -60,7 +61,6 @@ export function postWorkout (newWorkout){
 
 export function postUser(user) {
   return (dispatch) => {
-    console.log("postUser hit", user)
     fetch('http://localhost:3000/workouts', {
       method: 'POST',
       headers: {
@@ -104,30 +104,7 @@ export function fetchUser() {
     })
     .then(data => data.json())
     .then(data=> {
-      debugger
       dispatch({type: "SET_CURRENT_USER", payload: data})
     })
   }
 }
-
-// const login = (username, password) => {
-//   return fetch(`http://localhost:3000/workouts/auth/`,
-//     {
-//       method: 'POST',
-//       headers: {
-//         'Accept': 'application/json',
-//         'Content-Type': 'application/json',
-//       },
-//       body: JSON.stringify({ username, password })
-//     }).then(res => res.json())
-//
-// }
-
-// const auth_login = { //PROBABLY NEED TO EDIT
-//   auth: {
-//     login
-//   },
-//   paintains: {
-//
-//   }
-// }

@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { postWorkout } from '../actions/workouts'
+// import { postUserWorkout } from '../actions/workouts'
 // import workouts from '../actions/workouts'
 
 class WorkoutForm extends React.Component {
@@ -10,22 +11,27 @@ class WorkoutForm extends React.Component {
     intensity: '',
     category: '',
     duration: '',
-    description: ''
+    description: '',
+    user_id: ''
   }
 
+
   handleChange = (event) => {
+    console.log(this.props)
     this.setState({
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
+      user_id: this.props.workouts.auth.currentUser.id
     })
   }
 
   handleSubmit = (event) => {
-    console.log("submit hit")
-    event.preventDefault()
-    this.props.postWorkout(this.state)
+    event.preventDefault();
+    this.props.postWorkout(this.state);
+    // this.props.postUserWorkout(this.state)
   }
 
   render() {
+    // console.log(this.props.workouts.auth.currentUser.id)
     return (
       <div>
         <label>Create a new workout</label>< br/><br />
@@ -42,12 +48,18 @@ class WorkoutForm extends React.Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    workouts: state
+  };
+};
+
 const mapDispatchToProps = (dispatch) => {
   return {
     postWorkout: (wo) => {
       dispatch(postWorkout(wo))
-    }
+    },
   };
 };
 
-export default connect(null, mapDispatchToProps)(WorkoutForm);
+export default connect(mapStateToProps, mapDispatchToProps)(WorkoutForm);

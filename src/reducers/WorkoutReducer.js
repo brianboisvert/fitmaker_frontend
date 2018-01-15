@@ -19,6 +19,7 @@ export function workouts(state = [], action) {
         case 'WORKOUTS_FETCH_DATA_SUCCESS':
           return action.workouts;
         case 'ADD_WORKOUT':
+        console.log("state:", state, "payload:", action.payload)
           return [...state, action.payload]
         default:
             return state;
