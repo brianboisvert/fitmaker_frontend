@@ -9,6 +9,8 @@ import NavBar from './containers/NavBar'
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import LandingPage from './components/LandingPage'
 import SignUp from './containers/SignUp'
+import WorkoutNow from './containers/WorkoutNow'
+import EditWorkout from './containers/EditWorkout'
 
 
 class App extends React.Component {
@@ -29,6 +31,13 @@ class App extends React.Component {
           <Route exact path="/home" component={WorkoutList} />
           <Route exact path="/" component={LandingPage} />
           <Route exact path="/register" component={SignUp} />
+          <Route exact path="/on_demand" component={WorkoutNow} />
+          <Route exact path="/workouts/:id/edit" render={(routerProps) => {
+              const id = parseInt(routerProps.match.params.id, 10)
+              const workout = this.props.currentUser.id ? this.props.currentUser.workouts.find(workout => workout.id === id) : false
+              const current_user = this.props.currentUser ? this.props.currentUser : null
+              return <EditWorkout workout={workout} currentUser={current_user}/>
+            }} />
         </div>
       </Router>
     );

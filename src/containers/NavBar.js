@@ -21,6 +21,9 @@ const NavBar = () => {
         <Menu.Item>
           <NavLink to="/login">Log In</NavLink>
         </Menu.Item>
+        <Menu.Item>
+          <NavLink to="/on_demand">Workout Now</NavLink>
+        </Menu.Item>
       </Menu.Menu>
     </Menu>
   );

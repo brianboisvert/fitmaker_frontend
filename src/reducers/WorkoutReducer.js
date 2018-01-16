@@ -15,13 +15,13 @@ export function workoutsIsLoading(state = false, action) {
     }
 }
 export function workouts(state = [], action) {
+  console.log(action)
     switch (action.type) {
         case 'WORKOUTS_FETCH_DATA_SUCCESS':
           return action.workouts;
-        case 'ADD_WORKOUT':
-        console.log("state:", state, "payload:", action.payload)
-          return [...state, action.payload]
+        case 'DELETE_WORKOUT':
+          return action.payload;
         default:
-            return state;
+          return state;
     }
 }

@@ -36,13 +36,13 @@ export function workoutsFetchData(url) {
     };
 }
 
-export function postWorkout (newWorkout){
-  console.log(newWorkout.user_id)
+export function postWorkout(newWorkout){
     return (dispatch) =>
     {
       fetch('http://localhost:3000/workouts', {
         method: 'POST',
         headers: {
+          'Authorization': localStorage.getItem('token'),
           'Accept': 'application/json',
           'Content-Type': 'application/json',
         },
@@ -52,10 +52,11 @@ export function postWorkout (newWorkout){
           category: newWorkout.category,
           duration: newWorkout.duration,
           description: newWorkout.description,
-          user_id: newWorkout.user_id
+          // sets: [exercises: [{exercise: newWorkout}]]
+          user: [{"id": newWorkout.user_id, "username": newWorkout.username}]
         })
       }).then(res => res.json())
-      .then(workout => dispatch({type: "ADD_WORKOUT", payload: workout}))
+      .then(workout => dispatch({type: "ADD_WORKOUTS", payload: workout}))
     }
 }
 
@@ -107,4 +108,34 @@ export function fetchUser() {
       dispatch({type: "SET_CURRENT_USER", payload: data})
     })
   }
+}
+
+export function deleteWorkout(id) {
+  return (dispatch) => {
+    fetch(`http://localhost:3000/workouts/${id}`, {
+    method: 'delete',
+    headers: {
+      'Authorization': localStorage.getItem('token'),
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    }
+  }).then(res => res.json())
+   .then(workouts => dispatch({type: 'DELETE_WORKOUT', payload: workouts}))
+}
+}
+
+export function updateWorkout(editedWorkout) {
+  console.log(editedWorkout)
+  return (dispatch) => {
+    fetch(`http://localhost:3000/workouts/${editedWorkout.id}`, {
+    method: 'PATCH',
+    body: JSON.stringify(editedWorkout),
+    headers: {
+      'Authorization': localStorage.getItem('token'),
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
+  }).then(res => res.json())
+   .then(workouts => dispatch({type: "EDIT_WORKOUTS", payload: workouts}))
+}
 }

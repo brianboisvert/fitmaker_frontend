@@ -1,16 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { workoutsFetchData } from '../actions/workouts'
-import Workout from '../components/workout'
+import WorkoutIndividual from '../containers/WorkoutIndividual'
+import EditWorkout from '../containers/EditWorkout'
 
 class WorkoutList extends React.Component {
 
-  componentDidMount() {
-      this.props.fetchData('http://localhost:3000/workouts');
-  }
+  // componentDidMount() {
+  //     this.props.fetchData('http://localhost:3000/workouts');
+  // }
 
   render() {
-    // if (this.props.hasErrored) {
+    // if (this.props.hasErrored) {1
     //   return <p>Sorry! There was an error loading the workout</p>;
     // }
     //
@@ -24,12 +25,18 @@ class WorkoutList extends React.Component {
     //   )
     // })
 
-    const workouts = this.props.workouts ? this.props.workouts.map((el, i)=><Workout title={el.title} key={i}/>) : null
+    const myWorkouts = this.props.workouts ? this.props.workouts.map((el, i)=><WorkoutIndividual workout={el} key={i} store={this.props.store} />) : null
 
+// console.log(this.props)
     return (
-      <ul>
-        {workouts}
-      </ul>
+      <div>
+        <div>
+          <h2>My Workouts</h2>
+          <ul>
+            {myWorkouts}
+          </ul>
+        </div>
+      </div>
     )
   }
 }
