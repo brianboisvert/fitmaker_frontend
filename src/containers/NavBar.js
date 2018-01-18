@@ -2,8 +2,16 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Menu } from 'semantic-ui-react';
 import '../App.css'
+import { connect } from 'react-redux'
+import { authReducer } from '../reducers/AuthReducer'
 
-const NavBar = () => {
+const NavBar = (props) => {
+  //   if (this.props.currentUser) {
+  //        <NavLink to="/login">Log Out</NavLink>
+  //   } else {
+  //      <NavLink to="/login">Log In</NavLink>
+  //   }
+  // }
   return (
     <Menu>
       <Menu.Menu>
@@ -19,7 +27,7 @@ const NavBar = () => {
           <NavLink to="/create_workout">Create Workout</NavLink>
         </Menu.Item>
         <Menu.Item>
-          <NavLink to="/login">Log In</NavLink>
+          <NavLink to="/login">Log in</NavLink>
         </Menu.Item>
         <Menu.Item>
           <NavLink to="/on_demand">Workout Now</NavLink>
@@ -29,4 +37,11 @@ const NavBar = () => {
   );
 };
 
-export default NavBar;
+const mapStateToProps = (state) => {
+  return {
+  currentUser: state.currentUser
+}
+}
+
+export default connect(mapStateToProps, { authReducer })(NavBar)
+// export default NavBar;

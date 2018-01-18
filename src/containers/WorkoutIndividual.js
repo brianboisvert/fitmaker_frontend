@@ -3,6 +3,8 @@ import { NavLink } from 'react-router-dom';
 import WorkoutDetails from '../components/WorkoutDetails'
 import { connect } from 'react-redux'
 import { deleteWorkout } from '../actions/workouts'
+import { workouts } from '../reducers/WorkoutReducer'
+// import { withRouter } from 'react-router-dom'
 
 class WorkoutIndividual extends React.Component{
 
@@ -39,10 +41,17 @@ class WorkoutIndividual extends React.Component{
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    state: state
+  }
+}
+
 const mapDispatchToProps = (dispatch) => {
   return {
     deleteWorkout: (wo) => dispatch(deleteWorkout(wo))
   }
 }
 
-export default connect(null, mapDispatchToProps)(WorkoutIndividual);
+
+export default connect(mapStateToProps, mapDispatchToProps)(WorkoutIndividual);

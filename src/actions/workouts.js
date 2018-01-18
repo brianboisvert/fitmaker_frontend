@@ -18,7 +18,6 @@ export function workoutsFetchDataSuccess(workouts) {
     };
 }
 
-
 export function workoutsFetchData(url) {
     return (dispatch) => {
         dispatch(workoutsIsLoading(true));
@@ -37,9 +36,10 @@ export function workoutsFetchData(url) {
 }
 
 export function postWorkout(newWorkout){
+  console.log(newWorkout)
     return (dispatch) =>
     {
-      fetch('http://localhost:3000/workouts', {
+       fetch('http://localhost:3000/workouts', {
         method: 'POST',
         headers: {
           'Authorization': localStorage.getItem('token'),
@@ -52,11 +52,14 @@ export function postWorkout(newWorkout){
           category: newWorkout.category,
           duration: newWorkout.duration,
           description: newWorkout.description,
-          // sets: [exercises: [{exercise: newWorkout}]]
-          user: [{"id": newWorkout.user_id, "username": newWorkout.username}]
+          user: [{"id": newWorkout.user_id, "username": newWorkout.username}],
+          sets: newWorkout.sets.map((set) => [set.exercise1, set.exercise2, set.exercise3])
+          // sets: newWorkout.sets.map((set) => ("exercise1": set.exercise1, "exercise2": set.exercise2, "exercise3": set.exercise3 ))
         })
       }).then(res => res.json())
-      .then(workout => dispatch({type: "ADD_WORKOUTS", payload: workout}))
+      .then(workout => {
+        dispatch({type: "ADD_WORKOUTS", payload: workout})
+      })
     }
 }
 
@@ -77,7 +80,7 @@ export function postUser(user) {
   }
 }
 
-export function loginUser(username, password) {
+export function loginUser(username, password, history) {
   return (dispatch) => {
     fetch('http://localhost:3000/login', {
       method: 'POST',
@@ -91,6 +94,7 @@ export function loginUser(username, password) {
     .then(data=> {
       localStorage.setItem('token', data.jwt)
       dispatch({type: "LOGIN_USER", payload: data})
+      history.push('/home')
     })
   }
 }
@@ -120,11 +124,12 @@ export function deleteWorkout(id) {
       'Content-Type': 'application/json',
     }
   }).then(res => res.json())
-   .then(workouts => dispatch({type: 'DELETE_WORKOUT', payload: workouts}))
+  .then(data=>dispatch({type: 'DELETE_WORKOUT', payload: data}))
+   // .then(workouts => dispatch({type: 'DELETE_WORKOUT', payload: workouts}))
 }
 }
 
-export function updateWorkout(editedWorkout) {
+export function updateWorkout(editedWorkout, history) {
   console.log(editedWorkout)
   return (dispatch) => {
     fetch(`http://localhost:3000/workouts/${editedWorkout.id}`, {
@@ -136,6 +141,9 @@ export function updateWorkout(editedWorkout) {
       'Content-Type': 'application/json',
     },
   }).then(res => res.json())
-   .then(workouts => dispatch({type: "EDIT_WORKOUTS", payload: workouts}))
+   .then(workouts => {
+     dispatch({type: "EDIT_WORKOUTS", payload: workouts})
+     history.push('/home')
+   })
 }
 }

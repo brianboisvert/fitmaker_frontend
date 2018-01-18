@@ -10,54 +10,31 @@ class WorkoutForm extends React.Component {
     category: '',
     duration: '',
     description: '',
-    // exercises: [{exercise: ''}],
-    sets: [
-      {exercises:
-        [{exercise: ''}]
-      }
-    ],
+    sets: [],
     users: []
   }
-
 
   handleChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value,
       users: [
       this.props.workouts.auth.currentUser,
-    ]
+      ]
     })
   }
 
   handleSubmit = (event) => {
     event.preventDefault();
     this.props.postWorkout(this.state);
-    // this.props.dispatch({})
-  }
-
-  handleAddExercise = (event) => {
-    this.setState({
-      exercises: this.state.exercises.exercise.concat([{exercise: ''}])
-    })
-  }
-
-  handleExerciseChange = (idx) => (evt) => {
-    const newExercise = this.state.exercises.map((exercise, sidx) => {
-      if (idx !== sidx) return exercise;
-      return { ...exercise, exercise: evt.target.value };
-    });
-    this.setState({ exercises: newExercise });
   }
 
   handleAddSet = (event) => {
     this.setState({
-      sets: this.state.sets.concat([{exercises: [{exercise: ''}]}])
+      sets: this.state.sets.concat({exercise1: 'lunges', exercise2: 'pushups', exercise3: 'crunches'})
     })
   }
 
-
   render() {
-    console.log(this.props)
     return (
       <div>
         <h1>Create a new workout</h1>< br/><br />
@@ -69,19 +46,20 @@ class WorkoutForm extends React.Component {
           <input type='number' placeholder='duration in minutes' name='duration' onChange={this.handleChange} /><br />
           <textarea placeholder='description' name='description' onChange={this.handleChange} /><br /><br />
 
-          <button onClick={this.handleAddSet}>Add Set</button><br />
-          <label>Warm Up</label><br />
-          <input type='number' placeholder='how many sets?' /><br />
-          <input type="text" placeholder="set #1" name="excercise" onChange={this.handleChange} /><br /><br />
-          {this.state.sets.map((input, i) => <div>
-            <label>Set #{i + 1}</label><br />
-            <input type='number' placeholder='how many sets?' /><br />
-            <input type="text" placeholder="set #1" name="excercise" onChange={this.handleChange} /><br />
-            <button onClick={this.handleAddExercise}>Add Exercise</button><br /><br />
-          </div>)}
-
-          <br /><br /><br /><button type='submit'>Submit Workout</button>
+          {this.state.sets.map((set, index) => (
+            <div key={index}>
+            <div>
+              <label>Set #{index + 1}</label><br/>
+                <input type='number' placeholder='how many sets?' value='3' /><br />
+                <input type="text" placeholder="set #1" name="excercise1" value="lunges"/><br />
+                <input type="text" placeholder="set #2" name="excercise2" value="pushups"/><br />
+                <input type="text" placeholder="set #3" name="excercise3" value="crunches"/><br />
+            </div>
+          </div>
+          ))}
+          <button type='submit'>Submit Workout</button>
         </form>
+        <button onClick={this.handleAddSet}>Add Set</button><br /><br />
       </div>
     )
   }

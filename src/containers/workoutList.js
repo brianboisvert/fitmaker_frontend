@@ -6,32 +6,17 @@ import EditWorkout from '../containers/EditWorkout'
 
 class WorkoutList extends React.Component {
 
-  // componentDidMount() {
-  //     this.props.fetchData('http://localhost:3000/workouts');
-  // }
 
   render() {
-    // if (this.props.hasErrored) {1
-    //   return <p>Sorry! There was an error loading the workout</p>;
-    // }
-    //
-    // if (this.props.isLoading) {
-    //   return <p>Loading...</p>;
-    // }
+  const completeWorkouts = this.props.workouts ? this.props.workouts.filter(workout => workout.title !== "") : null
+  const myWorkouts = completeWorkouts ? completeWorkouts.map( (workout, i) => {
+    return (<WorkoutIndividual workout={workout} key={i} />)}) : null
 
-    // const workouts = this.props.workouts.map( (workout, i) => {
-    //   return (
-    //     <Workout workout={workout} key={i} />
-    //   )
-    // })
-
-    const myWorkouts = this.props.workouts ? this.props.workouts.map((el, i)=><WorkoutIndividual workout={el} key={i} store={this.props.store} />) : null
-
-// console.log(this.props)
     return (
       <div>
         <div>
-          <h2>My Workouts</h2>
+          <h1>Hey, {this.props.user}!</h1>
+          <h2>Here are your workouts:</h2>
           <ul>
             {myWorkouts}
           </ul>
@@ -43,6 +28,7 @@ class WorkoutList extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
+    user: state.auth.currentUser.username,
     workouts: state.auth.currentUser.workouts,
     hasErrored: state.workoutsHasErrored,
     isLoading: state.workoutsIsLoading

@@ -21,7 +21,6 @@ class App extends React.Component {
     }
   }
   render() {
-    // console.log(this.props)
     return (
       <Router>
         <div>
@@ -36,7 +35,7 @@ class App extends React.Component {
               const id = parseInt(routerProps.match.params.id, 10)
               const workout = this.props.currentUser.id ? this.props.currentUser.workouts.find(workout => workout.id === id) : false
               const current_user = this.props.currentUser ? this.props.currentUser : null
-              return <EditWorkout workout={workout} currentUser={current_user}/>
+              return <EditWorkout {...routerProps} workout={workout} currentUser={current_user}/>
             }} />
         </div>
       </Router>

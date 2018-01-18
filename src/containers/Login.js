@@ -7,11 +7,10 @@ class Login extends React.Component {
   constructor() {
     super();
     this.state = {
-      // error: false,
       fields: {
         username: '',
         password: ''
-      }
+      },
     };
   }
 
@@ -22,11 +21,15 @@ class Login extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault()
-    this.props.loginUser(this.state.fields.username, this.state.fields.password)
+    this.props.loginUser(this.state.fields.username, this.state.fields.password, this.props.history);
   }
 
   render() {
     const { fields } = this.state;
+
+
+
+    console.log('login props:', this.props)
     return (
       <div>
         {this.state.error ? <h1>Try Again</h1> : null}
@@ -60,7 +63,6 @@ class Login extends React.Component {
     );
   }
 }
-
 
 
 
