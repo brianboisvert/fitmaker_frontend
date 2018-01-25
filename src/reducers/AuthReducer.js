@@ -2,14 +2,13 @@ export const authReducer = (state = {currentUser: {}}, action) => {
   switch (action.type) {
     case 'SET_CURRENT_USER':
       return { ...state, currentUser: {
-        id: action.payload.id,
+        // id: action.payload.id,
         username: action.payload.username,
         workouts: action.payload.workouts,
       }};
-      //DO WE NEED BOTH LOGIN_USER AND SET_CURRENT_USER
     case 'LOGIN_USER':
       return {...state, currentUser: {
-        id: action.payload.id,
+        // id: action.payload.id,
         username: action.payload.username,
         workouts: action.payload.workouts,
       }}
@@ -18,18 +17,33 @@ export const authReducer = (state = {currentUser: {}}, action) => {
     case 'ADD_WORKOUTS':
       return {...state, currentUser: {...state.currentUser, workouts: [...state.currentUser.workouts, action.payload]}};
     case 'EDIT_WORKOUTS':
-
       let newWorkouts = state.currentUser.workouts.slice()
       let found = newWorkouts.find(workout => {
-        return workout.id === action.payload.id
+        return workout.info.id === action.payload.info.id
       })
+
 
       let index = newWorkouts.indexOf(found)
 
       newWorkouts[index] = action.payload
+      // console.log('NEWWORKOUTS', newWorkouts)
+
+      newWorkouts.filter((el) => {
+        el.info.id
+      })
+
       return {...state, currentUser: {...state.currentUser, workouts: newWorkouts}}
     case 'DELETE_WORKOUT':
-      return {...state, currentUser: {...state.currentUser, workouts: action.payload}}
+      let workoutsPostDelete = state.currentUser.workouts.slice()
+      let foundWorkout = workoutsPostDelete.find(workout => {
+        return workout.info.id === action.payload
+      })
+
+
+      let i = workoutsPostDelete.indexOf(foundWorkout)
+
+      workoutsPostDelete = [...workoutsPostDelete.slice(0, i), ...workoutsPostDelete.slice(i+1)]
+      return {...state, currentUser: {...state.currentUser, workouts: workoutsPostDelete}}
     default:
       return state;
   }

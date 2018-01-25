@@ -1,45 +1,39 @@
-export function workoutsHasErrored(bool) {
-    return {
-        type: 'WORKOUTS_HAS_ERRORED',
-        hasErrored: bool
-    };
-}
-export function workoutsIsLoading(bool) {
-    return {
-        type: 'WORKOUTS_IS_LOADING',
-        isLoading: bool
-    };
-}
-
 export function workoutsFetchDataSuccess(workouts) {
-    return {
-        type: 'WORKOUTS_FETCH_DATA_SUCCESS',
-        workouts
-    };
+  return (dispatch) => {
+    fetch('http://localhost:3000/workouts', {
+      method: 'GET',
+      headers: {
+        'Authorization': localStorage.getItem('token'),
+      }
+    })
+      .then(res => res.json())
+      .then(data => {
+        dispatch({type: "WORKOUTS_FETCH_DATA_SUCCESS", payload: data})
+      })
+  }
 }
 
-export function workoutsFetchData(url) {
-    return (dispatch) => {
-        dispatch(workoutsIsLoading(true));
-        fetch(url)
-            .then((response) => {
-                if (!response.ok) {
-                    throw Error(response.statusText);
-                }
-                dispatch(workoutsIsLoading(false));
-                return response;
-            })
-            .then((response) => response.json())
-            .then((items) => dispatch(workoutsFetchDataSuccess(items)))
-            .catch(() => dispatch(workoutsHasErrored(true)));
-    };
+export function setCurrentExercise(exercise) {
+  return {
+    type: 'SET_CURRENT_EXERCISE',
+    payload: exercise
+  }
+}
+
+export function fetchAllExercises() {
+  return (dispatch) => {
+    fetch('http://localhost:3000/exercises')
+      .then(res => res.json())
+      .then(data => {
+        dispatch({type: "FETCH_ALL_EXERCISES", payload: data})
+      })
+  }
 }
 
 export function postWorkout(newWorkout){
-  console.log(newWorkout)
     return (dispatch) =>
     {
-       fetch('http://localhost:3000/workouts', {
+       return fetch('http://localhost:3000/workouts', {
         method: 'POST',
         headers: {
           'Authorization': localStorage.getItem('token'),
@@ -52,31 +46,37 @@ export function postWorkout(newWorkout){
           category: newWorkout.category,
           duration: newWorkout.duration,
           description: newWorkout.description,
-          user: [{"id": newWorkout.user_id, "username": newWorkout.username}],
-          sets: newWorkout.sets.map((set) => [set.exercise1, set.exercise2, set.exercise3])
-          // sets: newWorkout.sets.map((set) => ("exercise1": set.exercise1, "exercise2": set.exercise2, "exercise3": set.exercise3 ))
+          sets: newWorkout.sets
         })
       }).then(res => res.json())
       .then(workout => {
         dispatch({type: "ADD_WORKOUTS", payload: workout})
+        // return
       })
     }
 }
 
 export function postUser(user) {
   return (dispatch) => {
-    fetch('http://localhost:3000/workouts', {
+    return fetch('http://localhost:3000/signup/', {
       method: 'POST',
       headers: {
+        'Authorization': localStorage.getItem('token'),
         'Accept': 'application/json',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
+      body: JSON.stringify(
+        {
         username: user.username,
         password: user.password,
-      })
+        email: user.email
+      }
+    )
     }).then(res => res.json())
-    .then(workout => dispatch({type: "ADD_WORKOUT", payload: workout}))
+    .then(user =>  {
+      localStorage.setItem('token', user.jwt)
+      dispatch({type: "LOGIN_USER", payload: user})
+    })
   }
 }
 
@@ -92,6 +92,7 @@ export function loginUser(username, password, history) {
     })
     .then(data => data.json())
     .then(data=> {
+      // console.log('ACTION:', data)
       localStorage.setItem('token', data.jwt)
       dispatch({type: "LOGIN_USER", payload: data})
       history.push('/home')
@@ -117,20 +118,22 @@ export function fetchUser() {
 export function deleteWorkout(id) {
   return (dispatch) => {
     fetch(`http://localhost:3000/workouts/${id}`, {
-    method: 'delete',
+    method: 'DELETE',
     headers: {
       'Authorization': localStorage.getItem('token'),
       'Accept': 'application/json',
       'Content-Type': 'application/json',
     }
   }).then(res => res.json())
-  .then(data=>dispatch({type: 'DELETE_WORKOUT', payload: data}))
+  .then(data=>{
+    // console.log("DELETED Data:", data)
+    dispatch({type: 'DELETE_WORKOUT', payload: id})
    // .then(workouts => dispatch({type: 'DELETE_WORKOUT', payload: workouts}))
-}
+})}
 }
 
 export function updateWorkout(editedWorkout, history) {
-  console.log(editedWorkout)
+  console.log('ENTERED DATA', editedWorkout)
   return (dispatch) => {
     fetch(`http://localhost:3000/workouts/${editedWorkout.id}`, {
     method: 'PATCH',
@@ -142,8 +145,30 @@ export function updateWorkout(editedWorkout, history) {
     },
   }).then(res => res.json())
    .then(workouts => {
+     console.log('RETURN DATA', workouts)
      dispatch({type: "EDIT_WORKOUTS", payload: workouts})
+     dispatch({type: "SET_CURRENT_WORKOUT", payload: undefined})
      history.push('/home')
    })
 }
+}
+
+export function setCurrentWorkout(workout) {
+  console.log(workout)
+  return {
+    type: 'SET_CURRENT_WORKOUT',
+    payload: workout,
+  }
+}
+
+export function logOutUser() {
+  localStorage.removeItem('token');
+  return { type: 'LOGOUT_USER' };
+};
+
+export function setExerciseSearch(workouts){
+  return {
+    type: 'SET_EXERCISE_SEARCH',
+    payload: workouts
+  }
 }

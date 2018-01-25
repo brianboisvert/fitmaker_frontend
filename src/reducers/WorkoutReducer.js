@@ -1,8 +1,19 @@
 export function workouts(state = [], action) {
     switch (action.type) {
         case 'WORKOUTS_FETCH_DATA_SUCCESS':
-          return action.workouts;
+          return [...state, action.payload];
         default:
           return state;
     }
+}
+
+export function currentWorkout(state = {}, action) {
+  console.log(action.payload)
+  switch(action.type) {
+    case 'SET_CURRENT_WORKOUT':
+      return action.payload
+      // return [...state, action.payload]
+    default:
+      return state;
+  }
 }

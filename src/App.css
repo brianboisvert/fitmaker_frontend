@@ -1,3 +1,4 @@
+
 .App {
   text-align: center;
 }
@@ -22,9 +23,151 @@
   font-size: large;
 }
 
+/* EXERCISE DETAILS  */
+
+.exercise {
+  text-align: center;
+  height:100vh !important;
+  background-image: url('https://images.pexels.com/photos/669577/pexels-photo-669577.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb') !important;
+  background-size: cover !important;
+  background-attachment: fixed;
+  overflow: scroll;
+  vertical-align: middle;
+}
+
+.ex-inspo {
+  position: fixed;
+  bottom: 10px;
+  right: 250px;
+}
+
+/* LANDING PAGE */
 .landing-page {
   text-align: center;
+  height:100vh !important;
+  background-image: url('https://images.pexels.com/photos/685531/pexels-photo-685531.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb') !important;
+  background-size: cover !important;
+  background-attachment: fixed;
+  overflow: scroll;
+  vertical-align: middle;
 }
+
+.welcome {
+  vertical-align: middle;
+  background-color: rgba(255,255,255, 0.5);
+  display: inline-block;
+  border-style: solid;
+  border-width: .5px;
+  padding: 15px;
+  margin-top: 100px;
+}
+
+/* LOGIN PAGE  */
+.login {
+  height:100vh !important;
+  background-image: url('https://images.pexels.com/photos/28080/pexels-photo.jpg?w=1260&h=750&auto=compress&cs=tinysrgb') !important;
+  background-size: cover !important;
+  background-attachment: fixed;
+  overflow: scroll;
+}
+
+.loggin {
+  vertical-align: middle;
+  background-color: rgba(255,255,255, 0.3);
+  position: fixed;
+  top: 35%;
+  left: 40%;
+  transform: translate(-50%, -50%);
+  border-style: solid;
+  border-width: .5px;
+  border-color: black;
+  padding: 15px;
+  width: 400px;
+}
+
+/*  HOME PAGE */
+.workout-list-form {
+  text-align: center;
+  height:100vh !important;
+  background-image: url('https://images.pexels.com/photos/669578/pexels-photo-669578.jpeg?w=940&h=650&dpr=2&auto=compress&cs=tinysrgb') !important;
+  background-size: cover !important;
+  background-attachment: fixed;
+  overflow: scroll;
+}
+
+/* .list {
+  background-attachment: fixed;
+
+  overflow: scroll;
+} */
+
+
+
+
+/* CREATE WORKOUT FORM */
+
+.workout-form {
+  height:100vh !important;
+  background-image: url('https://images.pexels.com/photos/669582/pexels-photo-669582.jpeg?w=940&h=650&dpr=2&auto=compress&cs=tinysrgb') !important;
+  background-size: cover !important;
+  background-attachment: fixed;
+  overflow: scroll;
+  text-align: center;
+}
+
+.form {
+  margin-left: 10%;
+  vertical-align: middle;
+  padding-top: 15px;
+  background-color: rgba(225, 225, 225, .25);
+  padding: 10px 15px;
+}
+
+.create {
+  display: inline-block;
+  width: 300px;
+}
+
+.exercises {
+  display: table;
+  table-layout: fixed;
+  vertical-align: middle;
+  height: 50%;
+  border-style: solid;
+  border-width: .5px;
+  padding: 0px 15px;
+  margin-top: 100px;
+}
+
+#ex-name {
+  text-align: center;
+  display: table-row;
+}
+
+#each-ex-name {
+  display: table-cell;
+    vertical-align: middle;
+}
+
+/* WORKOUT NOW */
+.workout-now {
+  height:100vh !important;
+  background-image: url('https://images.pexels.com/photos/703016/pexels-photo-703016.jpeg?w=940&h=650&dpr=2&auto=compress&cs=tinysrgb') !important;
+  background-size: cover !important;
+  background-attachment: fixed;
+  overflow: scroll;
+  text-align: center;
+}
+
+.wo-container {
+  text-align: center;
+  background-color: rgba(255,255,255, 0.70);
+  border-style: solid;
+  border-color: rgba(255,255,255, 0.8);
+  padding: 25px;
+  display: inline-block;
+}
+
 
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
