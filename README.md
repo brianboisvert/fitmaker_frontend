@@ -1,5 +1,5 @@
 # FitMaker
-Welcome to FitMaker, where you can create and save your favorite at-home workouts! This app allows a user to register, sign in, browse exercises, and create, edit, and delete workouts.
+Welcome to FitMaker, where you can create and save your favorite at-home workouts! This app allows users to register, sign in, browse exercises, and create, edit, and delete workouts.
 
 ## Getting Started
 
@@ -14,3 +14,6 @@ npm install
 ```
 npm start
 ```
+
+### Accessing the App
+You are now ready to use the app in your browser.
