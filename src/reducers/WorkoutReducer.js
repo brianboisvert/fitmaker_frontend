@@ -12,7 +12,8 @@ export function currentWorkout(state = {}, action) {
   switch(action.type) {
     case 'SET_CURRENT_WORKOUT':
       return action.payload
-      // return [...state, action.payload]
+    case 'CLEAR_CURRENT_WOKOUT':
+      return {}
     default:
       return state;
   }

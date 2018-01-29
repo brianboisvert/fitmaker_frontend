@@ -41,7 +41,6 @@ workoutComplete = () => {
   }
 
   render() {
-    console.log('currentWorkout', this.props)
     return (
       this.props.currentWorkout.info ? this.renderWorkout() : <div>Loading...</div>
     )
@@ -49,7 +48,6 @@ workoutComplete = () => {
 }
 
 const mapStateToProps = (state) => {
-
   return {
     currentWorkout: state.currentWorkout,
     allWorkouts: state.auth.currentUser.workouts

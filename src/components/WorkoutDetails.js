@@ -4,17 +4,14 @@ import { connect } from 'react-redux'
 
 
 const WorkoutDetails = (props) => {
-
+console.log(props)
   const handleSelect = (event) => {
-    // console.log('select')
     props.setCurrentWorkout(props.workout)
     props.history.push(`/on_demand/${props.workout.info.id}`)
   }
 
   const handleOnClickDelete = (event) => {
-    const workoutId = props.workout.info.id
-    props.setCurrentWorkout()
-    props.deleteWorkout(workoutId)
+    props.deleteWorkout(props.workout.info.id)
   }
 
   const handleEdit = (event) => {
@@ -57,7 +54,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     deleteWorkout: (id) => dispatch(deleteWorkout(id)),
-    setCurrentWorkout: (workout) => dispatch(setCurrentWorkout(workout))
+    setCurrentWorkout: () => dispatch(setCurrentWorkout())
   }
 }
 

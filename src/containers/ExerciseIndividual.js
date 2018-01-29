@@ -13,7 +13,6 @@ class ExerciseIndividual extends React.Component{
 
     const exerciseName = this.props.exercise.name !== "" ? this.props.exercise.name : null
     const currentEx = this.props.currentExercise.id ? <ExerciseDetails /> : null
-    // console.log(this.props)
 
     return(
       <div>

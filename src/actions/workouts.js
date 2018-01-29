@@ -51,7 +51,6 @@ export function postWorkout(newWorkout){
       }).then(res => res.json())
       .then(workout => {
         dispatch({type: "ADD_WORKOUTS", payload: workout})
-        // return
       })
     }
 }
@@ -126,9 +125,8 @@ export function deleteWorkout(id) {
     }
   }).then(res => res.json())
   .then(data=>{
-    // console.log("DELETED Data:", data)
     dispatch({type: 'DELETE_WORKOUT', payload: id})
-   // .then(workouts => dispatch({type: 'DELETE_WORKOUT', payload: workouts}))
+    dispatch({type: 'CLEAR_CURRENT_WOKOUT'})
 })}
 }
 

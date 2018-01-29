@@ -71,7 +71,6 @@ validateForm() {
 
 
   render() {
-    // console.log(this.props.history)
     return(
       <div style={{"text-align": "center"}}>
       <div className="login">

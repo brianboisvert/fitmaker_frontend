@@ -127,8 +127,6 @@ constructor(props) {
 
 
   render(){
-    // console.log(this.state)
-
     return(
       this.props.currentWorkout ? this.renderForm() : <div>Loading...</div>
     )
