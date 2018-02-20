@@ -3,7 +3,7 @@ Welcome to FitMaker, where you can create and save your favorite at-home workout
 
 ## Demo
 
-Live Demo: http://fitmaker.surge.sh/create_workout
+Live Demo: http://fitmaker.surge.sh
 
 Demo login credentials:
 
