@@ -17,5 +17,3 @@ Demo login credentials:
 **Back-end:** API created with Ruby on Rails. It utilizes RESTful routes and the Bcrypt gem.
 
 This repository is the front-end companion to [this repository](https://github.com/brianboisvert/fitmaker_backend).
-
-## Getting Started
