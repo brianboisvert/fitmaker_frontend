@@ -6,7 +6,9 @@ Welcome to FitMaker, where you can create and save your favorite at-home workout
 Live Demo: http://fitmaker.surge.sh/create_workout
 
 Demo login credentials:
+
   username: sam
+
   password: sam
 
 This repository is the front-end companion to [this repository](https://github.com/brianboisvert/fitmaker_backend).
