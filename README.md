@@ -12,8 +12,8 @@ Demo login credentials:
   password: sam
 
 ## How is it it made?
-**Front-end:** Created with React and Redux and styled with Semantic UI and CSS. It includes authentication and React Router. It is hosted with Surge.
+**Front-end:** Created with React and Redux and styled with Semantic UI and CSS. It includes authentication and React Router. It is hosted on Surge.
 
-**Back-end:** API created with Ruby on Rails. It utilizes RESTful routes and the Bcrypt gem.
+**Back-end:** API created with Ruby on Rails. It utilizes RESTful routes and the Bcrypt gem. It is hosted on Heroku.
 
 This repository is the front-end companion to [this repository](https://github.com/brianboisvert/fitmaker_backend).
