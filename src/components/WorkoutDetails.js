@@ -54,7 +54,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     deleteWorkout: (id) => dispatch(deleteWorkout(id)),
-    setCurrentWorkout: () => dispatch(setCurrentWorkout())
+    setCurrentWorkout: (workout) => dispatch(setCurrentWorkout(workout))
   }
 }
 

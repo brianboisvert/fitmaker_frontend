@@ -1,6 +1,6 @@
 export function workoutsFetchDataSuccess(workouts) {
   return (dispatch) => {
-    fetch('http://localhost:3000/workouts', {
+    fetch('https://fitmakerbackend.herokuapp.com/workouts', {
       method: 'GET',
       headers: {
         'Authorization': localStorage.getItem('token'),
@@ -22,7 +22,7 @@ export function setCurrentExercise(exercise) {
 
 export function fetchAllExercises() {
   return (dispatch) => {
-    fetch('http://localhost:3000/exercises')
+    fetch('https://fitmakerbackend.herokuapp.com/exercises')
       .then(res => res.json())
       .then(data => {
         dispatch({type: "FETCH_ALL_EXERCISES", payload: data})
@@ -33,7 +33,7 @@ export function fetchAllExercises() {
 export function postWorkout(newWorkout){
     return (dispatch) =>
     {
-       return fetch('http://localhost:3000/workouts', {
+       return fetch('https://fitmakerbackend.herokuapp.com/workouts', {
         method: 'POST',
         headers: {
           'Authorization': localStorage.getItem('token'),
@@ -57,7 +57,7 @@ export function postWorkout(newWorkout){
 
 export function postUser(user) {
   return (dispatch) => {
-    return fetch('http://localhost:3000/signup/', {
+    return fetch('https://fitmakerbackend.herokuapp.com/signup/', {
       method: 'POST',
       headers: {
         'Authorization': localStorage.getItem('token'),
@@ -81,7 +81,7 @@ export function postUser(user) {
 
 export function loginUser(username, password, history) {
   return (dispatch) => {
-    fetch('http://localhost:3000/login', {
+    fetch('https://fitmakerbackend.herokuapp.com/login', {
       method: 'POST',
       headers: {
           'Accept': 'application/json',
@@ -101,7 +101,7 @@ export function loginUser(username, password, history) {
 
 export function fetchUser() {
   return (dispatch) => {
-    fetch('http://localhost:3000/current_user', {
+    fetch('https://fitmakerbackend.herokuapp.com/current_user', {
       method: 'GET',
       headers: {
           'Authorization': localStorage.getItem('token')
@@ -116,7 +116,7 @@ export function fetchUser() {
 
 export function deleteWorkout(id) {
   return (dispatch) => {
-    fetch(`http://localhost:3000/workouts/${id}`, {
+    fetch(`https://fitmakerbackend.herokuapp.com/workouts/${id}`, {
     method: 'DELETE',
     headers: {
       'Authorization': localStorage.getItem('token'),
@@ -126,14 +126,14 @@ export function deleteWorkout(id) {
   }).then(res => res.json())
   .then(data=>{
     dispatch({type: 'DELETE_WORKOUT', payload: id})
-    dispatch({type: 'CLEAR_CURRENT_WOKOUT'})
+    dispatch({type: 'CLEAR_CURRENT_WOKOUT', payload: null})
 })}
 }
 
 export function updateWorkout(editedWorkout, history) {
   console.log('ENTERED DATA', editedWorkout)
   return (dispatch) => {
-    fetch(`http://localhost:3000/workouts/${editedWorkout.id}`, {
+    fetch(`https://fitmakerbackend.herokuapp.com/workouts/${editedWorkout.id}`, {
     method: 'PATCH',
     body: JSON.stringify(editedWorkout),
     headers: {
@@ -152,10 +152,8 @@ export function updateWorkout(editedWorkout, history) {
 }
 
 export function setCurrentWorkout(workout) {
-  console.log(workout)
   return {
-    type: 'SET_CURRENT_WORKOUT',
-    payload: workout,
+    type: 'SET_CURRENT_WORKOUT', payload: workout,
   }
 }
 

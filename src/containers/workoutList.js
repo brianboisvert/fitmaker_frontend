@@ -11,7 +11,7 @@ class WorkoutList extends React.Component {
   const myWorkouts = this.props.workouts ? this.props.workouts.map( (workout, i) => {
     return (<WorkoutIndividual history={this.props.history} workout={workout} key={i} />)}) : null
   const welcomeMessage = this.props.workouts && this.props.workouts.length > 0 ? "Here are your workouts:" : "You don't have any saved workouts."
-  const currentWorkout = this.props.currentWorkout.info ? <WorkoutDetails workout={this.props.currentWorkout} history={this.props.history} /> : <div><h3 style={{"margin-top": "100px"}}>Click a Workout</h3></div>
+  const currentWorkout = this.props.currentWorkout && this.props.currentWorkout.info ? <WorkoutDetails workout={this.props.currentWorkout} history={this.props.history} /> : <div><h3 style={{"margin-top": "100px"}}>Click a Workout</h3></div>
 
 
     return (

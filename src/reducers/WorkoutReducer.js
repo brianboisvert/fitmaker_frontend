@@ -13,7 +13,7 @@ export function currentWorkout(state = {}, action) {
     case 'SET_CURRENT_WORKOUT':
       return action.payload
     case 'CLEAR_CURRENT_WOKOUT':
-      return {}
+      return action.payload
     default:
       return state;
   }

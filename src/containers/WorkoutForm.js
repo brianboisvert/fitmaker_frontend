@@ -151,9 +151,9 @@ class WorkoutForm extends React.Component {
             </div>
           </form>
           </div>
+          <button onClick={() => {this.props.history.push('exercises')}} className="ui button inverted silver tiny ex-inspo">exercise inspiration</button>
         </div>
         <div>
-          <button onClick={() => {this.props.history.push('exercises')}} className="ui button inverted silver tiny ex-inspo">exercise inspiration</button>
         </div>
       </div>
     )
