@@ -21,12 +21,12 @@ Demo login credentials:
 
 This repository is the front-end companion to [this repository](https://github.com/brianboisvert/fitmaker_backend).
 
-### Getting started
+## Getting started
 
-## Accessing the API
+### Accessing the API
 The frontend repo makes API requests against the back end server, found [here](https://fitmakerbackend.herokuapp.com/).
 
-## Installing
+### Installing
 Clone this repo to your local devise.
 
 Run the following command in your terminal to start the sever:
