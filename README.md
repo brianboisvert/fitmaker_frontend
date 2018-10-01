@@ -34,4 +34,4 @@ Run the following command in your terminal to start the sever:
 npm start
 ```
 
-Your application should now be running on http://localhost:3000/.
+Your application should now be running on ```http://localhost:3000/```.
